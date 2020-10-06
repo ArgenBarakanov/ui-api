@@ -1,0 +1,12 @@
+spring:
+  flyway:
+    schemas: ui_db
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=${spring.datasource.hikari.schema}
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      schema: ui_db
+    schema: classpath:db/schema.sql
+
