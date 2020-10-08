@@ -1,4 +1,4 @@
-package com.argen.uiapi.security;
+package com.argen.uiapi.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -12,7 +12,7 @@ import java.util.Date;
 @Component
 public class JwtProvider {
 
-private final String secret = "fgh7Kgd4L9";
+    private final String secret = "fgh7Kgd4L9";
 
 
     public String generateToken(String login) {
@@ -20,7 +20,7 @@ private final String secret = "fgh7Kgd4L9";
         return Jwts.builder()
                 .setSubject(login)
                 .setExpiration(date)
-                .signWith(SignatureAlgorithm.ES512,secret)
+                .signWith(SignatureAlgorithm.ES512, secret)
                 .compact();
     }
 

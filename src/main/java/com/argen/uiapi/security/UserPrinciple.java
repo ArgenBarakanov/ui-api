@@ -8,18 +8,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-public class CustomUsers implements UserDetails {
+public class UserPrinciple implements UserDetails {
 
     private String login;
     private String password;
     private Collection<? extends GrantedAuthority> grantedAuthorities;
 
-    public static CustomUsers createCustomUserDetail(User user) {
-        CustomUsers customUsers = new CustomUsers();
-        customUsers.login = user.getUserName();
-        customUsers.password = user.getPassword();
-        customUsers.grantedAuthorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getName()));
-        return customUsers;
+    public static UserPrinciple createCustomUserDetail(User user) {
+        UserPrinciple userPrinciple = new UserPrinciple();
+        userPrinciple.login = user.getUserName();
+        userPrinciple.password = user.getPassword();
+        userPrinciple.grantedAuthorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getName()));
+        return userPrinciple;
     }
 
     @Override

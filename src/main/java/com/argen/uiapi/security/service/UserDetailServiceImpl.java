@@ -1,5 +1,6 @@
-package com.argen.uiapi.security;
+package com.argen.uiapi.security.service;
 
+import com.argen.uiapi.security.UserPrinciple;
 import com.argen.uiapi.service.UserService;
 import com.argen.uiapi.entity.User;
 import lombok.SneakyThrows;
@@ -10,12 +11,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomUserDetailService implements UserDetailsService {
+public class UserDetailServiceImpl implements UserDetailsService {
 
     private UserService userService;
 
     @Autowired
-    public CustomUserDetailService(UserService userService) {
+    public UserDetailServiceImpl(UserService userService) {
         this.userService = userService;
     }
 
@@ -23,6 +24,6 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.findByLogin(username);
-        return CustomUsers.createCustomUserDetail(user);
+        return UserPrinciple.createCustomUserDetail(user);
     }
 }
