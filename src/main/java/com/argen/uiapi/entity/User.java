@@ -2,6 +2,7 @@ package com.argen.uiapi.entity;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -11,8 +12,9 @@ import javax.persistence.*;
 @Accessors(chain = true)
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long id;
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    public String id;
     public String userName;
     public String password;
     @ManyToOne
