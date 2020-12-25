@@ -26,7 +26,8 @@ public class UserService {
 
     public void saveUser(SignUp signUp) {
         try {
-            if(userRepository.findByUserName(signUp.username).isPresent()) throw new Exception("User with such username already exists");
+            if (userRepository.findByUserName(signUp.username).isPresent())
+                throw new Exception("User with such username already exists");
             Role role = roleRepository.findByName(signUp.role).orElseThrow(() -> new Exception("Role not Found"));
             User user = new User().setUserName(signUp.username)
                     .setPassword(signUp.password)

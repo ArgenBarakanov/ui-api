@@ -42,11 +42,10 @@ public class AuthenticationController {
 
     @PostMapping("/signin")
     public ResponseEntity<String> signIn(@RequestBody SignIn signIn) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signIn.username,signIn.password));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signIn.username, signIn.password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.generateToken(authentication);
-        return new ResponseEntity<>(token,HttpStatus.OK);
-
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
 
