@@ -6,6 +6,7 @@ import com.argen.uiapi.entity.Role;
 import com.argen.uiapi.security.UserPrinciple;
 import com.argen.uiapi.security.jwt.JwtProvider;
 import com.argen.uiapi.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/auth")
+@Slf4j
 public class AuthenticationController {
 
     @Autowired
@@ -42,9 +44,11 @@ public class AuthenticationController {
 
     @PostMapping("/signin")
     public ResponseEntity<String> signIn(@RequestBody SignIn signIn) {
+        log.info("Creating token for user {}", signIn.username);
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signIn.username, signIn.password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.generateToken(authentication);
+        log.info("Generated token {}", token);
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
 

@@ -1,6 +1,7 @@
 package com.argen.uiapi.rest;
 
 import com.argen.uiapi.dto.PersonDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,11 +14,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api")
+@Slf4j
 public class UserController {
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<List<PersonDto>> getAllUsers() {
+        log.info("Sending result");
         List<PersonDto> players = new ArrayList<>();
         players.add(new PersonDto().setName("Frank").setLastName("Lampard").setAbout("Midfield"));
         players.add(new PersonDto().setName("John").setLastName("Terry").setAbout("Defender"));
