@@ -5,11 +5,8 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class PersonDto {
-
-    private String name;
-
-    private String lastName;
-
-    private String about;
+public class Product {
+    private String title;
+    private Double price;
+    private String imageSrcUrl;
 }

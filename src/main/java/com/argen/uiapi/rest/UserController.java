@@ -1,7 +1,10 @@
 package com.argen.uiapi.rest;
 
-import com.argen.uiapi.dto.PersonDto;
+import com.argen.uiapi.dto.Category;
+import com.argen.uiapi.dto.TestDataFactory;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,19 +17,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api")
+@RequiredArgsConstructor
 @Slf4j
 public class UserController {
 
+    private final TestDataFactory testDataFactory;
+
     @GetMapping("/all")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<List<PersonDto>> getAllUsers() {
-        log.info("Sending result");
-        List<PersonDto> players = new ArrayList<>();
-        players.add(new PersonDto().setName("Frank").setLastName("Lampard").setAbout("Midfield"));
-        players.add(new PersonDto().setName("John").setLastName("Terry").setAbout("Defender"));
-        players.add(new PersonDto().setName("Petr").setLastName("Cech").setAbout("Goalkeeper"));
-        players.add(new PersonDto().setName("Didier").setLastName("Drogba").setAbout("Striker"));
-        return new ResponseEntity<>(players, HttpStatus.OK);
+    public ResponseEntity<List<Category>> getAllUsers() {
+        return new ResponseEntity<>(testDataFactory.generateCategory(), HttpStatus.OK);
     }
 
     @GetMapping("/test")
