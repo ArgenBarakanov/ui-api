@@ -16,16 +16,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api")
-@RequiredArgsConstructor
 @Slf4j
 public class UserController {
-
-    @Autowired
-    private final TestDataFactory testDataFactory;
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<List<Category>> getAllUsers() {
+        TestDataFactory testDataFactory = new TestDataFactory();
         return new ResponseEntity<>(testDataFactory.generateCategory(), HttpStatus.OK);
     }
 
