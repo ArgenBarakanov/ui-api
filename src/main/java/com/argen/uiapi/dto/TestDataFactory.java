@@ -13,6 +13,7 @@ public class TestDataFactory {
        categoryList.add(milk());
        categoryList.add(vegetables());
        categoryList.add(drinks());
+       categoryList.add(snacks());
        return categoryList;
     }
 
@@ -74,5 +75,26 @@ public class TestDataFactory {
         category.getProducts().add(product2);
         category.getProducts().add(product3);
         return category;
+    }
+
+    private Category snacks() {
+        Category category = new Category();
+        category.setName("Закуски");
+        Product product = new Product().setTitle("Чипсы Lays").setPrice(80.0);
+        Product product1 = new Product().setTitle("Колбаски").setPrice(200.0);
+        Product product2 = new Product().setTitle("Сырные косички").setPrice(1000.0);
+        Product product3 = new Product().setTitle("Нарезка").setPrice(1500.0);
+        Product product4 = new Product().setTitle("Сухари").setPrice(1500.0);
+        Product product5 = new Product().setTitle("Орешки").setPrice(1500.0);
+        Product product6 = new Product().setTitle("Бекон").setPrice(1500.0);
+        category.getProducts().add(product);
+        category.getProducts().add(product1);
+        category.getProducts().add(product2);
+        category.getProducts().add(product3);
+        category.getProducts().add(product4);
+        category.getProducts().add(product5);
+        category.getProducts().add(product6);
+        return category;
+
     }
 }
